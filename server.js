@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
@@ -14,6 +15,10 @@ const app = express();
 
 //to use body parser
 app.use(express.json());
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 //setting route and using the transactions file
 app.use("/api/v1/transactions", transactions);
